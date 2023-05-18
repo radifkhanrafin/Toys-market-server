@@ -1,0 +1,24 @@
+{
+    "toys": [
+      {
+        "picture": "https://example.com/toy1.jpg",
+        "name": "Toy 1",
+        "price": 19.99,
+        "rating": 4.5
+        
+      },
+      {
+        "picture": "https://example.com/toy2.jpg",
+        "name": "Toy 2",
+        "price": 29.99,
+        "rating": 4.8
+      },
+      {
+        "picture": "https://example.com/toy3.jpg",
+        "name": "Toy 3",
+        "price": 14.99,
+        "rating": 3.9
+      }
+    ]
+  }
+  
