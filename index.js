@@ -31,6 +31,13 @@ async function run() {
         const toysCollection = client.db('toysMarket').collection('toys_car');
         // const addedCollection = client.db('toysMarket').collection('addedToys');
 
+
+        const indexKeys = { toys_name: 1, sub_category: 1 }; 
+        const indexOptions = { name: "titleCategory" }; 
+        const result = await toysCollection.createIndex(indexKeys, indexOptions);
+        console.log(result);
+
+
         app.get('/toys/:id', async (req, res) => {
             const id = req.params.id;
             console.log(id)
@@ -78,25 +85,41 @@ async function run() {
             const result = await toysCollection.deleteOne(query);
             res.send(result)
         })
+
+        app.get("/toysBySearch/:text", async (req, res) => {
+            const text = req.params.text;
+            const result = await toysCollection
+              .find({
+                $or: [
+                  { toys_name: { $regex: text, $options: "i" } },
+                  { sub_category: { $regex: text, $options: "i" } },
+                ],
+              })
+              .toArray();
+              console.log(result)
+            res.send(result);
+          });
+
+          
         app.put("/updateJob/:id", async (req, res) => {
             const id = req.params.id;
             const body = req.body;
             console.log(body);
             const filter = { _id: new ObjectId(id) };
             const updateDoc = {
-              $set: {
-                toys_name: body.toys_name,
-                sub_category: body.sub_category,
-                quantity: body.quantity,
-                price: body.price,
-                toys_image: body.toys_image,
-                rating: body.rating,
-                description: body.description,
-              },
+                $set: {
+                    toys_name: body.toys_name,
+                    sub_category: body.sub_category,
+                    quantity: body.quantity,
+                    price: body.price,
+                    toys_image: body.toys_image,
+                    rating: body.rating,
+                    description: body.description,
+                },
             };
             const result = await toysCollection.updateOne(filter, updateDoc);
             res.send(result);
-          });
+        });
 
     } finally {
         // Ensures that the client will close when you finish/error
