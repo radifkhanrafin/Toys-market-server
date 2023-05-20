@@ -22,7 +22,7 @@ const client = new MongoClient(uri, {
 });
 
 async function run() {
-    try {
+    // try {
         //  client.connect();
 
 
@@ -118,10 +118,11 @@ async function run() {
             res.send(result);
         });
 
-    } finally {
-        // Ensures that the client will close when you finish/error
-        // await client.close();
-    }
+    // } 
+    // finally {
+    //     // Ensures that the client will close when you finish/error
+    //     // await client.close();
+    // }
 }
 run().catch(console.dir);
 
