@@ -10,7 +10,7 @@ app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@toysmarketdata.uv9io2a.mongodb.net/?retryWrites=true&authSource=admin`;
 
-// const uri = 'mongodb+srv://toysMarketData:4phbYiE5yF03LRJB@toysmarketdata.uv9io2a.mongodb.net/?retryWrites=true&authSource=admin';
+
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -98,7 +98,7 @@ async function run() {
             res.send(result)
         })
 
-        app.put("/updateJob/:id", async (req, res) => {
+        app.put("/updateToys/:id", async (req, res) => {
             const id = req.params.id;
             const body = req.body;
             console.log(body);
